@@ -7,7 +7,14 @@
 
     <ul>
         {% for product in products %}
-            <li>{{ product.name }} - ${{ product.price }}</li>
+            <li>
+                <h2>{{ product.name }}</h2>
+                <p>{{ product.description }}</p>
+                <p>{{ product.size }}</p> 
+                <p>
+                    {{ product.isAvailable ? 'available' : 'not available' }}
+                </p>
+            </li>
         {% endfor %}          
     </ul>   
     
