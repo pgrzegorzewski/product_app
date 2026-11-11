@@ -10,7 +10,9 @@
     <p>{{ product.size }}</p>
     <p>{{ product.isAvailable ? 'available' : 'not available' }}</p>
     
-    <a href="{{ path('product_edit', {'id': product.id}) }}">Edit Product</a>
-
+    <a href="{{ path('product_edit', {'id': product.id}) }}"><button>Edit Product</button></a>
+    <a href="{{path('product_delete', {'id': product.id})}}"><button>Delete</button></a>
+    
     <h3><a href="{{path('product_index')}}"</a>back</h3>
+    
 {% endblock %}
