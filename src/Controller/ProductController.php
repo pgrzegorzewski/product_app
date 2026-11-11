@@ -115,7 +115,7 @@ final class ProductController extends AbstractController
 
             $form->handleRequest($request);
 
-            if($form->isSubmitted()) {
+            if($form->isSubmitted() && $form->isValid()) {
                 $manager->remove($product);
                 $manager->flush();
                 $this->addFlash('success', 'Product successfully deleted');
