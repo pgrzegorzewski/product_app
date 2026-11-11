@@ -65,6 +65,9 @@ final class ProductController extends AbstractController
          if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($product);
             $manager->flush();
+          
+            $this->addFlash('success', 'New product configured');
+
             return $this->redirectToRoute('product_show', ['id' => $product->getId()]);
          }
 
@@ -72,4 +75,29 @@ final class ProductController extends AbstractController
             'form' => $form,
         ]);
     }
+
+
+    #[Route('/prodcut/{id<\d+>}/edit', name: 'product_edit', methods:['GET', 'POST'])]
+    public function edit(Product $product, Request $request, EntityManagerInterface $manager): Response
+    {
+        $form = $this->createForm(ProductType::class, $product);
+
+         $form->handleRequest($request);
+
+         if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($product);
+            $manager->flush();
+          
+            $this->addFlash('success', 'Product edited');
+
+            return $this->redirectToRoute('product_show', ['id' => $product->getId()]);
+         }
+
+        return $this->render('product/edit.html.twig', [
+            'form' => $form,
+        ]);
+
+    }
+    
+
 }
