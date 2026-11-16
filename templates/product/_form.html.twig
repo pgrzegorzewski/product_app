@@ -9,5 +9,8 @@
     </label> 
     {{  form_errors(form.is_available) }}
 </dv>
+
+{{ form_row(form.categories) }}
+
 {{  form_row(form.save, {'label': button_label|default('Save')}) }}
 {{  form_end(form) }}

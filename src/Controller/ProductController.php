@@ -33,7 +33,7 @@ final class ProductController extends AbstractController
 
     #[Route('/product/{id}', name: 'product_show', methods:['GET'],
         requirements: ['id' => Requirement::DIGITS])]
-    public function show(Product $product): Response
+    public function show(Product $product, EntityManagerInterface $manager): Response
     {
     //     $product = $this->repository 
     //         ->createQueryBuilder('p')
@@ -49,6 +49,13 @@ final class ProductController extends AbstractController
         // if(!$product) {
         //     throw $this->createNotFoundException('Product not found');
         // }
+
+        // $sql = "SELECT c.* FROM category c 
+        //         JOIN product_category pc ON c.id = pc.category_id
+        //         WHERE pc.product_id = :product_id";
+                
+        // $connection = $manager->getConnection();
+        // $rows = $connection->executeQuery($sql, ['product_id' => $product->getId()])->fetchAllAssociative();
 
         return $this->render('product/show.html.twig', [
             'product' => $product,

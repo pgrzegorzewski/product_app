@@ -1,0 +1,10 @@
+<p>Categories:
+    {% for category in product.categories %}
+        {{ category.name -}}
+        {%- if not loop.last %}, 
+        {% endif %}
+        {% if product.categories|length === 0 %}
+            No categories
+        {%  endif %}
+    {% endfor %}
+</p>
