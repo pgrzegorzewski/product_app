@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Requirement\Requirement;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class ProductController extends AbstractController
 {
@@ -63,6 +64,7 @@ final class ProductController extends AbstractController
     }
 
     #[Route('/product/new', name: 'product_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $product = new Product();
@@ -86,6 +88,7 @@ final class ProductController extends AbstractController
 
 
     #[Route('/prodcut/{id<\d+>}/edit', name: 'product_edit', methods:['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
     public function edit(Product $product, Request $request, EntityManagerInterface $manager): Response
     {
         $form = $this->createForm(ProductType::class, $product);
@@ -108,7 +111,8 @@ final class ProductController extends AbstractController
     }
 
      #[Route('/prodcut/{id<\d+>}/delete', name: 'product_delete', methods:['GET', 'DELETE'])]
-    public function delete(Product $product, Request $request, EntityManagerInterface $manager): Response
+    #[IsGranted('ROLE_USER')]
+     public function delete(Product $product, Request $request, EntityManagerInterface $manager): Response
     {
         $form = $this->createFormBuilder()
             ->setAction($this->generateUrl('product_delete', [
